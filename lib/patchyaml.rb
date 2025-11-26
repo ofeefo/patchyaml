@@ -13,10 +13,8 @@ module PatchYAML
   class Error < StandardError; end
 
   def self.load(data)
-    Editor.new(data)
+    Editor.new(data.end_with?("\n") ? data : data.concat("\n"))
   end
 
-  def self.load_file(path)
-    Editor.new(File.read(path))
-  end
+  def self.load_file(path) = load(File.read(path))
 end
